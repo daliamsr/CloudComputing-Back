@@ -8,7 +8,6 @@ app.use(cors());
 app.use(bodyParser.json());
 
 app.use(bodyParser.urlencoded({ extended: true }));
-
 app.use('/messages', messagesRouter);
 
 const port = process.env.PORT || 8080;

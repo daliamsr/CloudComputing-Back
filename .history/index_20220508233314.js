@@ -5,11 +5,10 @@ const messagesRouter = require('./Routers/messages-router');
 
 const app = express();
 app.use(cors());
+app.use('messages', messagesRouter);
 app.use(bodyParser.json());
 
 app.use(bodyParser.urlencoded({ extended: true }));
-
-app.use('/messages', messagesRouter);
 
 const port = process.env.PORT || 8080;
 
