@@ -14,7 +14,7 @@ const buildInsertQueryString = (senderName, senderMail, receiverMail, messageCon
 const router = express.Router();
 router.post('/foreign', async (req, res) => {
   const { senderName, senderMail, receiverMail, messageContent, language } = req.body;
-  console.log('body:', req.body);
+
   if (!senderName || !senderMail || !receiverMail || !messageContent || !language) {
     return res.status(400).send('Bad request. Missing parametres.');
   }
@@ -46,7 +46,7 @@ router.post('/foreign', async (req, res) => {
     } else {
       return res.send('Language not supported');
     }
-    await sendMail(receiverMail, senderMail, senderName + '' + ' sent you a message', translationData.translatedText);
+    const sendMailResponse = await sendMail(receiverMail, senderMail, senderName + '' + ' sent you a message', translationData.translatedText);
 
     connection.query(queryString, (err, results) => {
       if (err) {
@@ -59,7 +59,7 @@ router.post('/foreign', async (req, res) => {
       });
     });
   } catch (err) {
-    console.log('Eroare:', err);
+    console.log(err);
     return res.send('Something went wrong');
   }
 });

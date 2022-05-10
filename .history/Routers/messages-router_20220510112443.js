@@ -59,7 +59,7 @@ router.post('/foreign', async (req, res) => {
       });
     });
   } catch (err) {
-    console.log('Eroare:', err);
+    console.log(err);
     return res.send('Something went wrong');
   }
 });
